@@ -1,12 +1,13 @@
+/* eslint no-param-reassign: "error" */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from './axiosMock';
 
 const getCarers = createAsyncThunk(
   'carers/getCarers',
   async () => {
-    const res = await axios.get(`/carers`);
+    const res = await axios.get('/carers');
     return res.data;
-  }
+  },
 );
 
 const getCarer = createAsyncThunk(
@@ -14,15 +15,15 @@ const getCarer = createAsyncThunk(
   async (carerId) => {
     const res = await axios.get(`/carer/${carerId}`);
     return res.data;
-  }
+  },
 );
 
-const carerSlice = createSlice({
-  name: 'carer',
+const peopleListSlice = createSlice({
+  name: 'peopleList',
   initialState: {
     carers: [],
     carer: null,
-    errors: {},
+    error: '',
   },
   reducers: {
   },
@@ -32,18 +33,18 @@ const carerSlice = createSlice({
     },
     [getCarers.rejected]: (state) => {
       state.carers = [];
-      state.errors.carers = 'Failed to load carers';
+      state.error = 'Failed to load carers';
     },
     [getCarer.fulfilled]: (state, action) => {
       state.carer = action.payload;
     },
     [getCarer.rejected]: (state) => {
       state.carer = null;
-      state.errors.carers = 'Failed to load carer';
+      state.error = 'Failed to load carer';
     },
-  }
+  },
 });
 
-const { reducer } = carerSlice;
-export { getCarers, getCarer }
+const { reducer } = peopleListSlice;
+export { getCarers, getCarer };
 export default reducer;

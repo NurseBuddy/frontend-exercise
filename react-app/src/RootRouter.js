@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import App from "./App";
-import {CarerList} from "./CarerList";
-import {Carer} from "./Carer";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App';
+import CarerList from './CarerList';
+import Carer from './Carer';
 
 function RootRouter() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/carers" exact component={CarerList} />
-        <Route path="/carers/:carerId" component={Carer} />
-        <Route component={App} />
-      </Switch>
+      <Routes>
+        <Route path="/carers" exact element={<CarerList />} />
+        <Route path="/carers/:carerId" element={<Carer />} />
+        <Route path="/" element={<App />} />
+      </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default RootRouter;

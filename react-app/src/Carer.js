@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {useDispatch, useSelector} from "react-redux";
-import {getCarer} from "./carerReducer";
+import { useDispatch, useSelector } from 'react-redux';
+import { getCarer } from './carerReducer';
 
-export function Carer() {
-  const {carerId} = useParams();
+function Carer() {
+  const { carerId } = useParams();
   const dispatch = useDispatch();
-  const carer = useSelector((state) => state.carer.carer);
+  const carer = useSelector((state) => state.peopleList.carer);
 
-  if (carer === null) {
-    dispatch(getCarer(carerId));
-  }
+  useEffect(() => {
+    if (carer === null) {
+      dispatch(getCarer(carerId));
+    }
+  }, [carer, carerId, dispatch]);
 
   if (!carer) {
     return null;
@@ -18,8 +20,16 @@ export function Carer() {
 
   return (
     <div>
-      <h2>{carer.name}</h2>
-      <p>{carer.id} -  {carer.name}</p>
+      <h2>{carer?.name}</h2>
+      <p>
+        {carer?.id}
+        {' '}
+        -
+        {' '}
+        {carer?.name}
+      </p>
     </div>
-  )
+  );
 }
+
+export default Carer;

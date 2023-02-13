@@ -1,22 +1,22 @@
-import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {getCarers} from "./carerReducer";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCarers } from './carerReducer';
 
-export function CarerList() {
+function CarerList() {
   const dispatch = useDispatch();
-  const carers = useSelector((state) => state.carer.carers);
+  const carers = useSelector((state) => state.peopleList.carers);
 
-  if (carers == null || carers.length === 0) {
-    dispatch(getCarers());
-  }
+  useEffect(() => {
+    if (carers == null || carers.length === 0) {
+      dispatch(getCarers());
+    }
+  }, [carers, dispatch]);
 
-  const formatCarers = () => {
-    return carers?.map((carer) => (
-      <li id={carer.id}>
-        <a href={`/carers/${carer.id}`}>{carer.name}</a>
-      </li>
-    ));
-  };
+  const formatCarers = () => carers?.map((carer) => (
+    <li id={carer.id}>
+      <a href={`/carers/${carer.id}`}>{carer.name}</a>
+    </li>
+  ));
 
   return (
     <>
@@ -27,3 +27,5 @@ export function CarerList() {
     </>
   );
 }
+
+export default CarerList;
