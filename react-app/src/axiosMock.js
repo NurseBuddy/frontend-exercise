@@ -7,8 +7,8 @@ const carers = [
   { id: 1, name: 'Tom', lastName: 'hanks' },
   { id: 2, name: 'Harry', lastName: 'Barrie' },
   { id: 3, name: 'Meghan', lastName: 'Fox' },
-  { id: 4, name: 'Alice', lastName: 'Malice' },
-  { id: 5, name: 'Iris', lastName: 'Boris' },
+  { id: 4, name: 'alice', lastName: 'Malice' },
+  { id: 5, name: 'iris', lastName: 'Boris' },
   { id: 6, name: 'Omar', lastName: 'Monk' }];
 
 mock.onGet('/carers').reply(200, carers);
